@@ -1,15 +1,15 @@
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo_multi.cmake)
-conan_basic_setup()
+conan_basic_setup(TARGETS)
 
 
 add_library(${PROJECT_NAME}
   
-  include/gpcinterproc/gpcinterproc.hpp src/gpcinterproc.cpp
+  include/gpcinterproc/lock_free_ringbuffer.hpp src/lock_free_ringbuffer.cpp
   
   conanfile.txt
 )
 
-target_include_directories(${PROJECT_NAME} PUBLIC $(CMAKE_CURRENT_SOURCE_DIR)/include)
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-conan_target_link_libraries(${PROJECT_NAME})
+target_link_libraries(${PROJECT_NAME} PUBLIC CONAN_PKG::boost)
