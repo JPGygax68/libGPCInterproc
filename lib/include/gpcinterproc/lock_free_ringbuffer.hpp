@@ -3,7 +3,8 @@
 #include <cstdint>
 #include <utility>
 #include <string>
-#include <boost/interprocess/shared_memory_object.hpp>
+//#include <boost/interprocess/shared_memory_object.hpp>
+#include <boost/interprocess/windows_shared_memory.hpp>
 
 
 namespace gpc
@@ -36,12 +37,11 @@ namespace gpc
             void free_dequeued();
 
         private:
-            //using shared_memory_object = boost::interprocess::shared_memory_object;
 
-            explicit Lock_free_ringbuffer(bi::shared_memory_object &&shmem, std::string &&name);
+            explicit Lock_free_ringbuffer(bi::windows_shared_memory &&shmem, std::string &&name);
 
             std::string                 _name;
-            bi::shared_memory_object    _mem_obj;
+            bi::windows_shared_memory   _mem_obj;
 
             uint64_t                    _enqueued_blocks = 0;
             uint64_t                    _dequeued_blocks = 0;

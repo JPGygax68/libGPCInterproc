@@ -4,9 +4,9 @@ namespace gpc
 {
     namespace interprocess 
     {
-        auto Lock_free_ringbuffer::create(String_cref name, size_t) -> Lock_free_ringbuffer
+        auto Lock_free_ringbuffer::create(String_cref name, size_t size) -> Lock_free_ringbuffer
         {
-            auto mem_obj = bi::shared_memory_object{bi::create_only, name.c_str(), bi::read_write};
+            auto mem_obj = bi::windows_shared_memory{bi::create_only, name.c_str(), bi::read_write, size};
             
             Lock_free_ringbuffer rb{std::move(mem_obj), std::move(std::string{name})};
             
@@ -15,10 +15,10 @@ namespace gpc
 
         Lock_free_ringbuffer::~Lock_free_ringbuffer()
         {
-            _mem_obj.remove(_name.c_str());
+            //_mem_obj.remove(_name.c_str());
         }
 
-        Lock_free_ringbuffer::Lock_free_ringbuffer(bi::shared_memory_object &&shmem, std::string &&name):
+        Lock_free_ringbuffer::Lock_free_ringbuffer(bi::windows_shared_memory &&shmem, std::string &&name):
             _name{std::move(name)},
             _mem_obj{std::move(shmem)}
         {
