@@ -5,7 +5,7 @@ conan_basic_setup(TARGETS)
 
 add_library(${PROJECT_NAME}
   
-  include/gpcinterproc/lock_free_ringbuffer.hpp src/lock_free_ringbuffer.cpp
+  include/gpc/interproc/Lock_free_ringbuffer.hpp src/Lock_free_ringbuffer.cpp
   
   conanfile.txt
 )

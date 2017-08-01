@@ -1,4 +1,5 @@
-#include <gpcinterproc/lock_free_ringbuffer.hpp>
+#include <gpc/interproc/lock_free_ringbuffer.hpp>
+
 
 namespace gpc
 {
@@ -8,9 +9,14 @@ namespace gpc
         {
             auto mem_obj = bi::windows_shared_memory{bi::create_only, name.c_str(), bi::read_write, size};
             
-            Lock_free_ringbuffer rb{std::move(mem_obj), std::move(std::string{name})};
-            
-            return std::move(rb);
+            return Lock_free_ringbuffer{std::move(mem_obj), std::move(std::string{name})};
+        }
+
+        auto Lock_free_ringbuffer::open(String_cref name) -> Lock_free_ringbuffer
+        {
+            auto mem_obj = bi::windows_shared_memory{bi::open_only, name.c_str(), bi::read_only};
+
+            return Lock_free_ringbuffer{std::move(mem_obj), std::move(std::string{name})};
         }
 
         Lock_free_ringbuffer::~Lock_free_ringbuffer()
