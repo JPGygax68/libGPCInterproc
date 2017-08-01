@@ -1,0 +1,6 @@
+[requires]
+boost/1.64.0@hoxnox/testing
+zlib/1.2.11@lasote/stable # needed by boost
+
+[generators]
+virtualenv
