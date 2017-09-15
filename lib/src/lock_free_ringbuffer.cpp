@@ -19,11 +19,6 @@ namespace gpc
             return Lock_free_ringbuffer{std::move(mem_obj), std::move(std::string{name})};
         }
 
-        Lock_free_ringbuffer::~Lock_free_ringbuffer()
-        {
-            //_mem_obj.remove(_name.c_str());
-        }
-
         Lock_free_ringbuffer::Lock_free_ringbuffer(bi::windows_shared_memory &&shmem, std::string &&name):
             _name{std::move(name)},
             _mem_obj{std::move(shmem)}

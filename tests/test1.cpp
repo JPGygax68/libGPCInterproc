@@ -8,10 +8,10 @@ int main(int argc, char *argv[])
     using namespace boost::process;
     using namespace gpc::interprocess;
 
-    // Run the test server
-
+    // Start the test server
     //system(argv[1]);
     spawn(argv[1]);
+    std::this_thread::sleep_for(std::chrono::seconds(1));
 
     // Connect to ringbuffer
     auto rb = Lock_free_ringbuffer::open("ringbuffer_test");

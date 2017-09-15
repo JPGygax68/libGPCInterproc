@@ -1,7 +1,7 @@
 [requires]
 #boost/1.64.0@lasote/vcpkg
-boost/1.64.0@hoxnox/testing
-zlib/1.2.11@lasote/stable # must be stated explicitly because, most likely, of a bug in Conan
+#boost/1.64.0@hoxnox/testing
+#zlib/1.2.11@lasote/stable # must be stated explicitly because, most likely, of a bug in Conan
 
 [generators]
 virtualenv

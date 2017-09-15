@@ -26,7 +26,6 @@ namespace gpc
 
             Lock_free_ringbuffer(Lock_free_ringbuffer &&) = default;
             Lock_free_ringbuffer(const Lock_free_ringbuffer &) = delete;
-            ~Lock_free_ringbuffer();
 
             // Producer
             auto start_enqueuing(uint64_t max_size) -> uint8_t *;
